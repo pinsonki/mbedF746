@@ -33,28 +33,40 @@ int main() {
     lv_obj_add_style(obj, &style, 0);
     lv_obj_center(obj);
     lv_obj_set_size(obj, lv_disp_get_hor_res(NULL), lv_disp_get_ver_res(NULL));
-    
-    /// Création du menu pour permettre à l'utilisateur de changer de page
+
     /*Create a menu object*/
     lv_obj_t * menu = lv_menu_create(lv_scr_act());
     lv_obj_set_size(menu, lv_disp_get_hor_res(NULL), lv_disp_get_ver_res(NULL));
+    lv_obj_set_width(menu, 370);
+    lv_obj_set_height(menu, 118);
     lv_obj_center(menu);
+
+    /*Modify the header*/
+    lv_obj_t * back_btn = lv_menu_get_main_header_back_btn(menu);
+    lv_obj_t * back_btn_label = lv_label_create(back_btn);
+    lv_label_set_text(back_btn_label, "Back");
 
     lv_obj_t * cont;
     lv_obj_t * label;
 
-    /*Create a sub page*/
-    lv_obj_t * sub_page = lv_menu_page_create(menu, NULL);
-    lv_obj_t * page_regle = lv_menu_page_create(menu, NULL);
-    lv_obj_t * page_dessin = lv_menu_page_create(menu, NULL);
-    lv_obj_t * page_affiche = lv_menu_page_create(menu, NULL);
+    /*Create sub pages*/
+    lv_obj_t * sub_1_page = lv_menu_page_create(menu, "Regles d'utilisation du capteur de mouvement");
 
-    cont = lv_menu_cont_create(sub_page);
-    cont = lv_menu_cont_create(page_regle);
-    cont = lv_menu_cont_create(page_dessin);
-    cont = lv_menu_cont_create(page_affiche);
+    cont = lv_menu_cont_create(sub_1_page);
     label = lv_label_create(cont);
-    lv_label_set_text(label, "Hello, I am hiding here");
+    lv_label_set_text(label, "Regles d'utilisation du capteur de mouvement");
+
+    lv_obj_t * sub_2_page = lv_menu_page_create(menu, "Suivre les dessins");
+
+    cont = lv_menu_cont_create(sub_2_page);
+    label = lv_label_create(cont);
+    lv_label_set_text(label, "Suivre les dessins");
+
+    lv_obj_t * sub_3_page = lv_menu_page_create(menu, "Afficher des dessins");
+
+    cont = lv_menu_cont_create(sub_3_page);
+    label = lv_label_create(cont);
+    lv_label_set_text(label, "Afficher des dessins");
 
     /*Create a main page*/
     lv_obj_t * main_page = lv_menu_page_create(menu, NULL);
@@ -62,17 +74,17 @@ int main() {
     cont = lv_menu_cont_create(main_page);
     label = lv_label_create(cont);
     lv_label_set_text(label, "Regles d'utilisation du capteur de mouvement");
-    lv_menu_set_load_page_event(menu, cont, page_regle);
+    lv_menu_set_load_page_event(menu, cont, sub_1_page);
 
     cont = lv_menu_cont_create(main_page);
     label = lv_label_create(cont);
     lv_label_set_text(label, "Suivre les dessins");
-    lv_menu_set_load_page_event(menu, cont, page_dessin);
+    lv_menu_set_load_page_event(menu, cont, sub_2_page);
 
     cont = lv_menu_cont_create(main_page);
     label = lv_label_create(cont);
     lv_label_set_text(label, "Afficher des dessins");
-    lv_menu_set_load_page_event(menu, cont, page_affiche);
+    lv_menu_set_load_page_event(menu, cont, sub_3_page);
 
     lv_menu_set_page(menu, main_page);
 
@@ -82,4 +94,4 @@ int main() {
         // put your main code here, to run repeatedly:
         ThisThread::sleep_for(10ms);
     }
-}
+ }
