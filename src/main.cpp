@@ -14,7 +14,7 @@ int main() {
     lv_style_init(&style);
     lv_style_set_radius(&style, 5);
 
-    /*Make a gradient*/
+    /*Mise en place du fond d'écran*/
     lv_style_set_bg_opa(&style, LV_OPA_COVER);
     static lv_grad_dsc_t grad;
     grad.dir = LV_GRAD_DIR_VER;
@@ -22,26 +22,26 @@ int main() {
     grad.stops[0].color = lv_palette_lighten(LV_PALETTE_GREY, 1);
     grad.stops[1].color = lv_palette_main(LV_PALETTE_BLUE);
 
-    /*Shift the gradient to the bottom*/
+    /*Mise en place du dégradé*/
     grad.stops[0].frac  = 128;
     grad.stops[1].frac  = 192;
 
     lv_style_set_bg_grad(&style, &grad);
 
-    /*Create an object with the new style*/
+    /*Création de l'objet pour le fond d'écran*/
     lv_obj_t * obj = lv_obj_create(lv_scr_act());
     lv_obj_add_style(obj, &style, 0);
     lv_obj_center(obj);
     lv_obj_set_size(obj, lv_disp_get_hor_res(NULL), lv_disp_get_ver_res(NULL));
 
-    /*Create a menu object*/
+    /*Créaation du menu*/
     lv_obj_t * menu = lv_menu_create(lv_scr_act());
     lv_obj_set_size(menu, lv_disp_get_hor_res(NULL), lv_disp_get_ver_res(NULL));
     lv_obj_set_width(menu, 370);
     lv_obj_set_height(menu, 118);
     lv_obj_center(menu);
 
-    /*Modify the header*/
+    /*Modification de l'en-tête*/
     lv_obj_t * back_btn = lv_menu_get_main_header_back_btn(menu);
     lv_obj_t * back_btn_label = lv_label_create(back_btn);
     lv_label_set_text(back_btn_label, "Back");
@@ -49,7 +49,7 @@ int main() {
     lv_obj_t * cont;
     lv_obj_t * label;
 
-    /*Create sub pages*/
+    /*Création des sous-pages*/
     lv_obj_t * sub_1_page = lv_menu_page_create(menu, "Regles d'utilisation du capteur de mouvement");
 
     cont = lv_menu_cont_create(sub_1_page);
@@ -68,7 +68,7 @@ int main() {
     label = lv_label_create(cont);
     lv_label_set_text(label, "Afficher des dessins");
 
-    /*Create a main page*/
+    /*Mise en place de la page principale*/
     lv_obj_t * main_page = lv_menu_page_create(menu, NULL);
 
     cont = lv_menu_cont_create(main_page);
